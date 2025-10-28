@@ -1,44 +1,67 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serveStatic } from "hono/bun";
-import type { ApiResponse } from "shared/dist";
 
-export const app = new Hono()
+const app = new Hono();
 
-.use('/*', cors({
+// CORS configuration
+app.use('/*', cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://cozyspace-style-guide.onrender.com'] 
+    ? ['https://cozyspace-style-guide.onrender.com']
     : ['http://localhost:5173'],
   credentials: true,
-}))
+}));
 
 // API routes
-.get("/api/", (c) => {
-	return c.text("Hello Hono!");
-})
+app.get("/api/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-.get("/api/hello", async (c) => {
-	const data: ApiResponse = {
-		message: "Hello BHVR!",
-		success: true,
-	};
+app.get("/api/hello", (c) => {
+  return c.json({
+    message: "Hello BHVR!",
+    success: true,
+    timestamp: new Date().toISOString(),
+  });
+});
 
-	return c.json(data, { status: 200 });
-})
+// Health check endpoint for Render
+app.get("/api/health", (c) => {
+  return c.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    port: process.env.PORT || 3000,
+  });
+});
 
-  // Serve static files from client/dist
-  .use('/*', serveStatic({
-    root: './client/dist',
-  }))
+// Serve static files from client/dist
+app.use('/*', serveStatic({
+  root: 'client/dist',
+}));
 
-  // Fallback to index.html for client-side routing
-  .get('*', serveStatic({
-    path: './client/dist/index.html',
-  }));
+// Fallback for client-side routing (SPA)
+app.get('*', serveStatic({
+  path: 'client/dist/index.html',
+}));
 
-const port = process.env.PORT || 3000;
+// Export for potential imports
+export default app;
 
-export default {
-  port,
+// Start the server with explicit port binding
+const port = parseInt(process.env.PORT || '3000', 10);
+const hostname = '0.0.0.0';
+
+console.log(`🚀 Starting server...`);
+console.log(`   Port: ${port}`);
+console.log(`   Hostname: ${hostname}`);
+console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+console.log(`   Working Directory: ${process.cwd()}`);
+
+const server = Bun.serve({
   fetch: app.fetch,
-};
+  port: port,
+  hostname: hostname,
+});
+
+console.log(`✅ Server is running on http://${hostname}:${port}`);
+console.log(`   Health check: http://${hostname}:${port}/api/health`);

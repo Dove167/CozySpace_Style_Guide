@@ -4,9 +4,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun",
-    "start": "bun run dist/index.js",
-    "dev": "bun --watch run src/index.ts"
+    "dev": "bun --watch run src/index.ts",
+    "build": "echo 'Skipping server build - Bun runs TypeScript directly'",
+    "start": "bun run src/index.ts"
   },
   "dependencies": {
     "hono": "^4.7.11",

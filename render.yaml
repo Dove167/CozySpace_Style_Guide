@@ -1,10 +1,13 @@
 services:
   - type: web
-    name: cozy-space-monolith
-    env: node
-    buildCommand: curl -fsSL https://bun.sh/install | bash && export PATH="$HOME/.bun/bin:$PATH" && bun install && bun run build:full
-    startCommand: bun server/dist/index.js
-    healthCheckPath: /
+    name: cozyspace-style-guide
+    runtime: docker
+    plan: free
+    buildCommand: bun install && turbo build
+    startCommand: cd server && bun run start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/health

@@ -5,24 +5,19 @@
   "author": "Steve Simkins",
   "license": "MIT",
   "homepage": "https://github.com/stevedylandev/bhvr",
-  "packageManager": "bun@1.2.4",
+  "packageManager": "bun@1.2.20",
   "workspaces": [
-    "./server",
-    "./client",
-    "./shared"
+    "client",
+    "server",
+    "shared"
   ],
   "scripts": {
     "dev": "turbo dev",
-    "dev:client": "turbo dev --filter=client",
-    "dev:server": "turbo dev --filter=server",
     "build": "turbo build",
-    "build:client": "turbo build --filter=client",
-    "build:server": "turbo build --filter=server",
-    "build:full": "turbo build --filter=client --filter=shared --filter=server",
+    "start": "cd server && bun run start",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "test": "turbo test",
-    "postinstall": "echo 'Install complete - run build manually'"
+    "test": "turbo test"
   },
   "keywords": [
     "bun",
