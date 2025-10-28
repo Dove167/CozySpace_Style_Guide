@@ -44,9 +44,6 @@ app.get('*', serveStatic({
   path: 'client/dist/index.html',
 }));
 
-// Export for potential imports
-export default app;
-
 // Start the server with explicit port binding
 const port = parseInt(process.env.PORT || '3000', 10);
 const hostname = '0.0.0.0';
