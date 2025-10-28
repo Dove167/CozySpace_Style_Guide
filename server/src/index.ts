@@ -36,29 +36,34 @@ app.get("/api/health", (c) => {
 
 // Serve static files from client/dist
 app.use('/*', serveStatic({
-  root: 'client/dist',
+  root: '../dist',
 }));
 
 // Fallback for client-side routing (SPA)
 app.get('*', serveStatic({
-  path: 'client/dist/index.html',
+  path: '../dist/index.html',
 }));
 
-// Start the server with explicit port binding
-const port = parseInt(process.env.PORT || '3000', 10);
-const hostname = '0.0.0.0';
+// Start the server ONLY if this file is run directly (not imported)
+if (import.meta.main) {
+  const port = parseInt(process.env.PORT || '3000', 10);
+  const hostname = '0.0.0.0';
 
-console.log(`🚀 Starting server...`);
-console.log(`   Port: ${port}`);
-console.log(`   Hostname: ${hostname}`);
-console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
-console.log(`   Working Directory: ${process.cwd()}`);
+  console.log(`🚀 Starting server...`);
+  console.log(`   Port: ${port}`);
+  console.log(`   Hostname: ${hostname}`);
+  console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`   Working Directory: ${process.cwd()}`);
 
-const server = Bun.serve({
-  fetch: app.fetch,
-  port: port,
-  hostname: hostname,
-});
+  const server = Bun.serve({
+    fetch: app.fetch,
+    port: port,
+    hostname: hostname,
+  });
 
-console.log(`✅ Server is running on http://${hostname}:${port}`);
-console.log(`   Health check: http://${hostname}:${port}/api/health`);
+  console.log(`✅ Server is running on http://${hostname}:${port}`);
+  console.log(`   Health check: http://0.0.0.0:${port}/api/health`);
+}
+
+// Export for testing or programmatic use
+export default app;

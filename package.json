@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "build:full": "turbo build --filter=client --filter=shared --filter=server",
     "start": "cd server && bun run start",
     "lint": "turbo lint",
     "type-check": "turbo type-check",

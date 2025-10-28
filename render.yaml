@@ -3,8 +3,8 @@ services:
     name: cozyspace-style-guide
     runtime: docker
     plan: free
-    buildCommand: bun install && turbo build
-    startCommand: cd server && bun run start
+    buildCommand: bun install && bun run build:full
+    startCommand: bun server/dist/index.js
     envVars:
       - key: NODE_ENV
         value: production
