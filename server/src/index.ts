@@ -64,6 +64,3 @@ if (import.meta.main) {
   console.log(`✅ Server is running on http://${hostname}:${port}`);
   console.log(`   Health check: http://0.0.0.0:${port}/api/health`);
 }
-
-// Export for testing or programmatic use
-export default app;
