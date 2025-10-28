@@ -54,6 +54,7 @@ if (import.meta.main) {
   console.log(`   Hostname: ${hostname}`);
   console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`   Working Directory: ${process.cwd()}`);
+  console.log(`   Static files from: ${process.cwd()}/../client/dist`);
 
   const server = Bun.serve({
     fetch: app.fetch,
