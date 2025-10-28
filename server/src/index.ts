@@ -30,4 +30,9 @@ export const app = new Hono()
 // .use("/*", serveStatic({ root: "../client/dist" }))
 // .get("*", serveStatic({ path: "../client/dist/index.html" }));
 
-export default app;
+const port = process.env.PORT || 3000;
+
+export default {
+  port,
+  fetch: app.fetch,
+};
