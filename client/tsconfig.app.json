@@ -17,6 +17,8 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "skipDefaultLibCheck": true,
+    "types": [],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

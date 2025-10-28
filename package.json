@@ -1,5 +1,5 @@
 {
-  "name": "CozySpace",
+  "name": "cozy-space",
   "version": "0.5.0",
   "description": "A monorepo template built with Bun, Hono, Vite, and React",
   "author": "Steve Simkins",
@@ -18,10 +18,11 @@
     "build": "turbo build",
     "build:client": "turbo build --filter=client",
     "build:server": "turbo build --filter=server",
+    "build:full": "turbo build --filter=client --filter=shared --filter=server",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "test": "turbo test",
-    "postinstall": "turbo build --filter=shared --filter=server"
+    "postinstall": "echo 'Install complete - run build manually'"
   },
   "keywords": [
     "bun",
@@ -33,7 +34,8 @@
   ],
   "devDependencies": {
     "bun-types": "latest",
-    "turbo": "^2.5.5"
+    "turbo": "^2.5.5",
+    "fdir": "^6.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.7.3"
