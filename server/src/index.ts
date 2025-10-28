@@ -1,8 +1,17 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serveStatic } from "hono/bun";
+import { existsSync, readdirSync } from "fs";
+import { resolve } from "path";
 
 const app = new Hono();
+
+// Request logging middleware
+app.use('*', async (c, next) => {
+  console.log(`📥 ${c.req.method} ${c.req.url}`);
+  await next();
+  console.log(`📤 ${c.req.method} ${c.req.url} → ${c.res.status}`);
+});
 
 // CORS configuration
 app.use('/*', cors({
@@ -34,14 +43,14 @@ app.get("/api/health", (c) => {
   });
 });
 
-// Serve static files from client/dist
+// Serve static files from ./public (copied from client/dist)
 app.use('/*', serveStatic({
-  root: '../client/dist',
+  root: './public',
 }));
 
 // Fallback for client-side routing (SPA)
 app.get('*', serveStatic({
-  path: '../client/dist/index.html',
+  path: './public/index.html',
 }));
 
 // Start the server ONLY if this file is run directly (not imported)
@@ -54,7 +63,22 @@ if (import.meta.main) {
   console.log(`   Hostname: ${hostname}`);
   console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`   Working Directory: ${process.cwd()}`);
-  console.log(`   Static files from: ${process.cwd()}/../client/dist`);
+
+  const staticPath = resolve(process.cwd(), './public');
+  console.log(`   Static files from: ${staticPath}`);
+  console.log(`   Static path exists: ${existsSync(staticPath)}`);
+
+  if (existsSync(staticPath)) {
+    console.log(`   Files in static directory:`);
+    try {
+      const files = readdirSync(staticPath);
+      files.forEach(file => console.log(`     - ${file}`));
+    } catch (e) {
+      console.error(`   Error reading directory: ${e}`);
+    }
+  } else {
+    console.error(`   ❌ Static directory does not exist!`);
+  }
 
   const server = Bun.serve({
     fetch: app.fetch,
