@@ -3,15 +3,15 @@ import Typography from "../components/Typography";
 import Button from "../components/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// Import all color images
-import softPeachImg from "@/assets/colors/#F4C2A1.png";
-import creamWhiteImg from "@/assets/colors/#FFF8F0.png";
-import warmCoralImg from "@/assets/colors/#E8A87C.png";
-import softGrayBlueImg from "@/assets/colors/#E8F0F2.png";
-import gentleBrownImg from "@/assets/colors/#8B7355.png";
-import successGreenImg from "@/assets/colors/#A8C09A.png";
-import warningPeachImg from "@/assets/colors/#F4D1A1.png";
-import errorCoralImg from "@/assets/colors/#E8A8A8.png";
+// Import all color images (WITHOUT # in filenames)
+import softPeachImg from "@/assets/colors/F4C2A1.png";
+import creamWhiteImg from "@/assets/colors/FFF8F0.png";
+import warmCoralImg from "@/assets/colors/E8A87C.png";
+import softGrayBlueImg from "@/assets/colors/E8F0F2.png";
+import gentleBrownImg from "@/assets/colors/8B7355.png";
+import successGreenImg from "@/assets/colors/A8C09A.png";
+import warningPeachImg from "@/assets/colors/F4D1A1.png";
+import errorCoralImg from "@/assets/colors/E8A8A8.png";
 
 export const Route = createFileRoute("/color-palette")({
 	component: ColorPalette,
