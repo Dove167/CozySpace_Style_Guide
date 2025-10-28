@@ -39,15 +39,15 @@ function ColorPalette() {
 						</Typography>
 						<div className="grid grid-cols-3 gap-4">
 							<div className="text-center">
-								<div className="w-16 h-16 rounded-full bg-[var(--color-primary)] mx-auto mb-2"></div>
+								<img src="/src/assets/colors/#F4C2A1.png" alt="Soft Peach" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Comfort & Warmth</Typography>
 							</div>
 							<div className="text-center">
-								<div className="w-16 h-16 rounded-full bg-[var(--color-secondary)] mx-auto mb-2"></div>
+								<img src="/src/assets/colors/#FFF8F0.png" alt="Cream White" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Peace & Focus</Typography>
 							</div>
 							<div className="text-center">
-								<div className="w-16 h-16 rounded-full bg-[var(--color-text-accent)] mx-auto mb-2"></div>
+								<img src="/src/assets/colors/#E8A87C.png" alt="Warm Coral" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Energy & Engagement</Typography>
 							</div>
 						</div>
@@ -61,11 +61,11 @@ function ColorPalette() {
 				{primaryColors.map((color, index) => (
 					<Card key={index} className="text-center">
 						<CardContent className="p-6">
-							<div
+							<img
+								src={`/src/assets/colors/${color.hex}.png`}
+								alt={color.name}
 								className="w-24 h-24 rounded-md mx-auto mb-4"
-								style={{ backgroundColor: color.hex, border: '1px solid var(--color-text-secondary)' }}
-							>
-							</div>
+							/>
 							<Typography variant="h4" className="mb-2">{color.name}</Typography>
 							<Typography variant="small" className="mb-2 font-mono">{color.hex}</Typography>
 							<Typography variant="small" className="mb-3 font-mono">{color.rgb}</Typography>
@@ -81,11 +81,11 @@ function ColorPalette() {
 				{extendedColors.map((color, index) => (
 					<Card key={index} className="text-center">
 						<CardContent className="p-6">
-							<div
+							<img
+								src={`/src/assets/colors/${color.hex}.png`}
+								alt={color.name}
 								className="w-20 h-20 rounded-md mx-auto mb-4"
-								style={{ backgroundColor: color.hex, border: '1px solid var(--color-text-secondary)' }}
-							>
-							</div>
+							/>
 							<Typography variant="h5" className="mb-2">{color.name}</Typography>
 							<Typography variant="small" className="mb-2 font-mono">{color.hex}</Typography>
 							<Typography variant="small" className="mb-3 font-mono">{color.rgb}</Typography>
