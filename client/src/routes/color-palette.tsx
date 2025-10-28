@@ -3,23 +3,81 @@ import Typography from "../components/Typography";
 import Button from "../components/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+// Import all color images
+import softPeachImg from "@/assets/colors/#F4C2A1.png";
+import creamWhiteImg from "@/assets/colors/#FFF8F0.png";
+import warmCoralImg from "@/assets/colors/#E8A87C.png";
+import softGrayBlueImg from "@/assets/colors/#E8F0F2.png";
+import gentleBrownImg from "@/assets/colors/#8B7355.png";
+import successGreenImg from "@/assets/colors/#A8C09A.png";
+import warningPeachImg from "@/assets/colors/#F4D1A1.png";
+import errorCoralImg from "@/assets/colors/#E8A8A8.png";
+
 export const Route = createFileRoute("/color-palette")({
 	component: ColorPalette,
 });
 
 function ColorPalette() {
 	const primaryColors = [
-		{ name: "Soft Peach", hex: "#F4C2A1", rgb: "rgb(244, 194, 161)", usage: "Primary buttons, brand accents, highlights" },
-		{ name: "Cream White", hex: "#FFF8F0", rgb: "rgb(255, 248, 240)", usage: "Main backgrounds, cards, content areas" },
-		{ name: "Warm Coral", hex: "#E8A87C", rgb: "rgb(232, 168, 124)", usage: "Hover states, active elements, borders" },
-		{ name: "Soft Gray-Blue", hex: "#E8F0F2", rgb: "rgb(232, 240, 242)", usage: "Page backgrounds, subtle sections" },
-		{ name: "Gentle Brown", hex: "#8B7355", rgb: "rgb(139, 115, 85)", usage: "Primary text, borders, icons" },
+		{ 
+			name: "Soft Peach", 
+			hex: "#F4C2A1", 
+			rgb: "rgb(244, 194, 161)", 
+			usage: "Primary buttons, brand accents, highlights",
+			img: softPeachImg 
+		},
+		{ 
+			name: "Cream White", 
+			hex: "#FFF8F0", 
+			rgb: "rgb(255, 248, 240)", 
+			usage: "Main backgrounds, cards, content areas",
+			img: creamWhiteImg 
+		},
+		{ 
+			name: "Warm Coral", 
+			hex: "#E8A87C", 
+			rgb: "rgb(232, 168, 124)", 
+			usage: "Hover states, active elements, borders",
+			img: warmCoralImg 
+		},
+		{ 
+			name: "Soft Gray-Blue", 
+			hex: "#E8F0F2", 
+			rgb: "rgb(232, 240, 242)", 
+			usage: "Page backgrounds, subtle sections",
+			img: softGrayBlueImg 
+		},
+		{ 
+			name: "Gentle Brown", 
+			hex: "#8B7355", 
+			rgb: "rgb(139, 115, 85)", 
+			usage: "Primary text, borders, icons",
+			img: gentleBrownImg 
+		},
 	];
 
 	const extendedColors = [
-		{ name: "Success Green", hex: "#A8C09A", rgb: "rgb(168, 192, 154)", usage: "Success messages, completed tasks" },
-		{ name: "Warning Peach", hex: "#F4D1A1", rgb: "rgb(244, 209, 161)", usage: "Gentle warnings, attention-needed states" },
-		{ name: "Error Coral", hex: "#E8A8A8", rgb: "rgb(232, 168, 168)", usage: "Error states, validation messages" },
+		{ 
+			name: "Success Green", 
+			hex: "#A8C09A", 
+			rgb: "rgb(168, 192, 154)", 
+			usage: "Success messages, completed tasks",
+			img: successGreenImg 
+		},
+		{ 
+			name: "Warning Peach", 
+			hex: "#F4D1A1", 
+			rgb: "rgb(244, 209, 161)", 
+			usage: "Gentle warnings, attention-needed states",
+			img: warningPeachImg 
+		},
+		{ 
+			name: "Error Coral", 
+			hex: "#E8A8A8", 
+			rgb: "rgb(232, 168, 168)", 
+			usage: "Error states, validation messages",
+			img: errorCoralImg 
+		},
 	];
 
 	return (
@@ -39,15 +97,15 @@ function ColorPalette() {
 						</Typography>
 						<div className="grid grid-cols-3 gap-4">
 							<div className="text-center">
-								<img src="/src/assets/colors/#F4C2A1.png" alt="Soft Peach" className="w-16 h-16 rounded-md mx-auto mb-2" />
+								<img src={softPeachImg} alt="Soft Peach" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Comfort & Warmth</Typography>
 							</div>
 							<div className="text-center">
-								<img src="/src/assets/colors/#FFF8F0.png" alt="Cream White" className="w-16 h-16 rounded-md mx-auto mb-2" />
+								<img src={creamWhiteImg} alt="Cream White" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Peace & Focus</Typography>
 							</div>
 							<div className="text-center">
-								<img src="/src/assets/colors/#E8A87C.png" alt="Warm Coral" className="w-16 h-16 rounded-md mx-auto mb-2" />
+								<img src={warmCoralImg} alt="Warm Coral" className="w-16 h-16 rounded-md mx-auto mb-2" />
 								<Typography variant="small">Energy & Engagement</Typography>
 							</div>
 						</div>
@@ -62,7 +120,7 @@ function ColorPalette() {
 					<Card key={index} className="text-center">
 						<CardContent className="p-6">
 							<img
-								src={`/src/assets/colors/${color.hex}.png`}
+								src={color.img}
 								alt={color.name}
 								className="w-24 h-24 rounded-md mx-auto mb-4"
 							/>
@@ -82,7 +140,7 @@ function ColorPalette() {
 					<Card key={index} className="text-center">
 						<CardContent className="p-6">
 							<img
-								src={`/src/assets/colors/${color.hex}.png`}
+								src={color.img}
 								alt={color.name}
 								className="w-20 h-20 rounded-md mx-auto mb-4"
 							/>
