@@ -36,12 +36,12 @@ app.get("/api/health", (c) => {
 
 // Serve static files from client/dist
 app.use('/*', serveStatic({
-  root: '../dist',
+  root: '../client/dist',
 }));
 
 // Fallback for client-side routing (SPA)
 app.get('*', serveStatic({
-  path: '../dist/index.html',
+  path: '../client/dist/index.html',
 }));
 
 // Start the server ONLY if this file is run directly (not imported)
