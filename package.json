@@ -15,7 +15,7 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "build:full": "turbo build --filter=client --filter=shared --filter=server && bun run copy:client",
-    "copy:client": "xcopy client\\dist server\\dist\\public /E /I /Y",
+    "copy:client": "cp -r client/dist server/dist/public",
     "start": "cd server && bun run start",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
