@@ -26,9 +26,15 @@ export const app = new Hono()
 	return c.json(data, { status: 200 });
 })
 
-// If running as two separate services, these static file serving lines are not needed
-// .use("/*", serveStatic({ root: "../client/dist" }))
-// .get("*", serveStatic({ path: "../client/dist/index.html" }));
+  // Serve static files from client/dist
+  .use('/*', serveStatic({
+    root: './client/dist',
+  }))
+
+  // Fallback to index.html for client-side routing
+  .get('*', serveStatic({
+    path: './client/dist/index.html',
+  }));
 
 const port = process.env.PORT || 3000;
 
