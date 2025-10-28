@@ -5,7 +5,12 @@ import type { ApiResponse } from "shared/dist";
 
 export const app = new Hono()
 
-.use(cors())
+.use('/*', cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://cozyspace-style-guide.onrender.com'] 
+    : ['http://localhost:5173'],
+  credentials: true,
+}))
 
 // API routes
 .get("/api/", (c) => {
@@ -21,10 +26,8 @@ export const app = new Hono()
 	return c.json(data, { status: 200 });
 })
 
-// Serve static files from client/dist for all other routes
-.use("/*", serveStatic({ root: "../client/dist" }))
-
-// Catch-all handler for SPA routing - serve index.html for any unmatched routes
-.get("*", serveStatic({ path: "../client/dist/index.html" }));
+// If running as two separate services, these static file serving lines are not needed
+// .use("/*", serveStatic({ root: "../client/dist" }))
+// .get("*", serveStatic({ path: "../client/dist/index.html" }));
 
 export default app;

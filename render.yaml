@@ -2,19 +2,22 @@ services:
   - type: web
     name: cozy-space-server
     env: node
-    rootDir: ./server
-    buildCommand: ../bun install && ../bun run build
-    startCommand: bun dist/index.js
+    buildCommand: curl -fsSL https://bun.sh/install | bash && export PATH="$HOME/.bun/bin:$PATH" && bun install && bun run build:server
+    startCommand: cd server && bun run start
     healthCheckPath: /
     envVars:
       - key: NODE_ENV
         value: production
+
   - type: static
     name: cozy-space-client
-    env: node
-    rootDir: ./client
-    buildCommand: ../bun install && ../bun run build
-    staticPublishPath: ./dist
+    buildCommand: curl -fsSL https://bun.sh/install | bash && export PATH="$HOME/.bun/bin:$PATH" && bun install && bun run build:client
+    staticPublishPath: ./client/dist
+    buildFilter:
+      paths:
+        - client/**
     envVars:
       - key: NODE_ENV
         value: production
+      - key: VITE_API_URL
+        value: https://cozy-space-server.onrender.com # Replace with your actual Render backend URL
